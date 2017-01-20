@@ -29,7 +29,7 @@ app.get('/android', function(request, response) {
 //https://calm-headland-74792.herokuapp.com/token-device
 //token
 //id_usuario_instagram
-var tokenDevicesURI = "token-device";
+var tokenDevicesURI = "usuario_instagram";
 app.post('/' + tokenDevicesURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
@@ -52,7 +52,7 @@ app.post('/' + tokenDevicesURI, function(request, response) {
 function generarRespuestaAToken(db, idAutoGenerado) {
 	var respuesta = {};
 	var usuario = "";
-	var ref = db.ref("token-device");
+	var ref = db.ref("usuario_instagram");
 	ref.on("child_added", function(snapshot, prevChildKey) {
 		usuario = snapshot.val();
 		respuesta = {
@@ -73,7 +73,7 @@ app.get("/registrar-usuario/:id/:id_usuario_instagram", function(request, respon
 	var id_usuario_instagram 	= request.params.id_usuario_instagram;
 
 	var db = firebase.database();
-	var ref = db.ref("token-device/" + id);
+	var ref = db.ref("usuario_instagram/" + id);
 	var usuario = "";
 	var respuesta = {};
 	
