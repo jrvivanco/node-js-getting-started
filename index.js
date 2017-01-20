@@ -65,12 +65,12 @@ function generarRespuestaAToken(db, idAutoGenerado) {
 }
 
 //GET
-//https://calm-headland-74792.herokuapp.com/toque-id_usuario_instagram
+//https://calm-headland-74792.herokuapp.com/registrar-usuario/
 //id
 //id_usuario_instagram
-app.get("/toque-animal/:id/:animal", function(request, response){
+app.get("/registrar-usuario/:id/:id_usuario_instagram", function(request, response){
 	var id 		= request.params.id;
-	var animal 	= request.params.animal;
+	var id_usuario_instagram 	= request.params.id_usuario_instagram;
 
 	var db = firebase.database();
 	var ref = db.ref("token-device/" + id);
@@ -80,19 +80,19 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 	ref.on("value", function(snapshot) {
 		console.log(snapshot.val());
 		usuario = snapshot.val();
-		var mensaje = animal + " te dio un toque";
+		var mensaje = id_usuario_instagram + " te dio un toque";
 		enviarNotificaion(usuario.token, mensaje);
 		respuesta = {
 			id: id,
-			token: usuario.token,
-			animal: usuario.animal
+			id_dispositivo: usuario.id_dispositivo,
+			id_usuario_instagram: usuario.id_usuario_instagram
 		};
 		response.send(JSON.stringify(respuesta));
 	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 		respuesta = {
 			id: "",
-			token: "",
+			id_dispositivo: "",
 			id_usuario_instagram: ""
 		};
 		response.send(JSON.stringify(respuesta));
