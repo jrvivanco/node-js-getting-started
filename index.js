@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true })); //Soporte para decodificar l
 
 var firebase = require("firebase-admin");
 firebase.initializeApp({
-  serviceAccount: "Mascotita-6e7fcffdfb73.json",
+  credential: "Mascotita-6e7fcffdfb73.json",
   databaseURL: "https://mascotita-aa119.firebaseio.com"
 });
 
