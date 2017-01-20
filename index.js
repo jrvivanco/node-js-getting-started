@@ -6,7 +6,7 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json()); //soporte para codificar json
 app.use(bodyParser.urlencoded({ extended: true })); //Soporte para decodificar las url
 
-var firebase = require("firebase");
+var firebase = require("firebase-admin");
 firebase.initializeApp({
   serviceAccount: "Mascotita-6e7fcffdfb73.json",
   databaseURL: "https://mascotita-aa119.firebaseio.com"

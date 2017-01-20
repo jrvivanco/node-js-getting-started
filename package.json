@@ -14,7 +14,8 @@
     "ejs": "2.4.1",
     "express": "4.13.3",
     "fcm-push": "1.1.2",
-    "firebase": "3.6.6"
+    "firebase": "3.6.6",
+    "firebase-admin": "4.0.5"
   },
   "repository": {
     "type": "git",
