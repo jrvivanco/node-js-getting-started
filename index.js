@@ -28,16 +28,16 @@ app.get('/android', function(request, response) {
 //POST
 //https://calm-headland-74792.herokuapp.com/token-device
 //token
-//animal
+//id_usuario_instagram
 var tokenDevicesURI = "token-device";
 app.post('/' + tokenDevicesURI, function(request, response) {
-	var token 	= request.body.token;
-	var animal 	= request.body.animal;
+	var id_dispositivo 	= request.body.id_dispositivo;
+	var id_usuario_instagram 	= request.body.id_usuario_instagram;
 	var db = firebase.database();
 	var tokenDevices = db.ref(tokenDevicesURI).push();
 	tokenDevices.set({
-		token: token,
-		animal: animal
+		id_dispositivo: id_dispositivo,
+		id_usuario_instagram: id_usuario_instagram
 	});	
 
 	var path = tokenDevices.toString(); //https://mascotita-aa119.firebaseio.com/token-device/-KJlTaOQPwP-ssImryV1
@@ -57,17 +57,17 @@ function generarRespuestaAToken(db, idAutoGenerado) {
 		usuario = snapshot.val();
 		respuesta = {
 			id: idAutoGenerado,
-			token: usuario.token,
-			animal: usuario.animal
+			id_dispositivo: usuario.id_dispositivo,
+			id_usuario_instagram: usuario.id_usuario_instagram
 		};
 	});
 	return respuesta;
 }
 
 //GET
-//https://calm-headland-74792.herokuapp.com/toque-animal
+//https://calm-headland-74792.herokuapp.com/toque-id_usuario_instagram
 //id
-//animal
+//id_usuario_instagram
 app.get("/toque-animal/:id/:animal", function(request, response){
 	var id 		= request.params.id;
 	var animal 	= request.params.animal;
@@ -93,7 +93,7 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 		respuesta = {
 			id: "",
 			token: "",
-			animal: ""
+			id_usuario_instagram: ""
 		};
 		response.send(JSON.stringify(respuesta));
 
