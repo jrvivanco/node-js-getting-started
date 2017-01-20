@@ -10,8 +10,11 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "body-parser": "1.16.0",
     "ejs": "2.4.1",
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "fcm-push": "1.1.2",
+    "firebase": "3.6.6"
   },
   "repository": {
     "type": "git",

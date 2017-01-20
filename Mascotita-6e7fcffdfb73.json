@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mascotita-aa119",
+  "private_key_id": "6e7fcffdfb73fe18989121e5a10089aa7d302a98",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDktdDTNw0e7jyg\n/jP3zAnL9HfHdaKQt8fxfHSFUPi8D5GnnwpbKEk68o47wABP62EY1Alh68MMpllT\nnA6XK7GvNs18yVgNho34P92t8Cbikxn0i57E/GAVArM6WmgdX2PQUl86bTijNfgn\nakygPn2mF6HGwQw9KgI4es2muH3/q7/0zua6EyU46BBLQbE4q2xoMRJ2mbo543gs\nw1qAfdVk1XNlh588nzQ31oIouJJExUph39/w8C1RJInIHNwfR9YUL9EJigH2mawQ\nuO+JDKleRYD77rGbX6zTYpScGUs7VGdciey5lKfYs+So9w0hl3zOaioj1pwCJN6D\nvi3OwX4/AgMBAAECggEAUS7UnFS7PJJ2RPNWwQvVImd5qPxxowsJVwfFWJlAYYjp\nO+WxSGBJdjopEL57neLASY7icba9Op1Fse8AItrorHg4gqX5sntjo44QAzDurJho\nqyxwRB4NgQe/VORIdryocob6tIOWiiCbIGqUHoFwGmfjDejyjjd+KEw2+Yodd4X0\nuq9pI4L13JWkU4wkIXkdPLeE0WXqVNSdJEngw85cvNkSKQobClH3e9BglfU0elRv\nW6qtbuO93IHZgmwBn4Hcw6OjG7pQvH2pPzB4aNGJ5rP1qkdd1drJSf/AY11DCnni\nhT9ULDdUCui6VXH7EJX0X1Pw4tF9hXCHkkdAgRb+iQKBgQD4cx38ElzcmQgHLke2\ngD5TIf69E2CHtVAdA2ee6reFHYpkNIhX6n2aRpe0viPU5M6RJgkRk9LZAdIdMIaQ\npE3VoYJKZ10GOVTSD+hFhmPyJ5zwqqdEtU0juaxbmew1+cbEQR+EZ/qq3J/DvJ0b\nDzL94pAeoB1zXyBm3PilHn9SLQKBgQDrqSFJWb5NS6PwwgeB8Cw61D8l5IT3jAmO\niwjxzuXsf1pM9YDeLZ4vwurgfp9oz0Pm+o81ho5TyjaozmrWUduouYsErRk/O5B6\nYsf5kgneC8wMrYe8KZQrC+aM9hjO35/IpG+CTj1WcD7mm6PhQCZD5oh3LNlMp9Y/\neZ8m/GTRmwKBgALeqYkA2Uu/BMW4diGYh5/EM8IRWDsZEAzVvjuqsGX8Ol3/8Vc6\noSrIB/aRf6502iH5E3+9emEBUWD+7376Nt/x1qRvXza0MNOgVWmALOVeKcTp47a6\ndWKlQWVpeL4C3ZXkvq1z2gRhOgMzyYjHeypNlKaV6OEtRx2JDeIyYPwdAoGBANFm\ndbdx0RFp1wDFyFoDiam0k3AeQLCedJd+n7IOAGxHNXwQ4jOKIXebIY3dtdQx58pE\ndiA/shRuKGeTE4fhMOgaBpdfIIH5cYXuZHc09yOhI+1X/LaL06b0aiZzPtQEDT0C\nMDt/Pi2ii6HqRpKOp/HJ1RTgey4MLOo2Ld88gnFlAoGAaNEECF7WjIfN/IOXCO7b\naiQMVxR7aplrV2m/A3iGPCX0ISsPK7ySQd4zQ9K7fIBGGbtpjzT9W7r7YLv7V1oU\nvdDNWNrOis4N6/V7O7Yr8tpV59IZzeBGelyI4zWQ/Z/kOChhX+iAhfPpxHAglToA\nZZk5KytEVcrTQwWBZPYqznc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mascotita-svr@mascotita-aa119.iam.gserviceaccount.com",
+  "client_id": "112308891449036870406",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mascotita-svr%40mascotita-aa119.iam.gserviceaccount.com"
+}
