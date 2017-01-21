@@ -105,19 +105,22 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 //https://calm-headland-74792.herokuapp.com/usuario_instagram
 //token
 //id_usuario_instagram
-var usuarioDevicesURI = "usuario_instagram";
-app.post('/' + usuarioDevicesURI, function(request, response) {
+var usuariosInstagramURI = "usuario_instagram";
+app.post('/' + usuariosInstagramURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
+	var nombre_usuario = request.body.nombre_usuario_instagram;
+	
 	var db = firebase.database();
-	var usuarios = db.ref(usuarioDevicesURI).push();
-	usuarios.set({
+	var usuariosInstagram = db.ref(usuariosInstagramURI).push();
+	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
-		id_usuario_instagram: id_usuario_instagram
+		id_usuario_instagram: id_usuario_instagram,
+		nombre_usuario_instagram: nombre_usuario_instagram
 	});	
 
 	var path = usuarios.toString(); //https://mascotita-aa119.firebaseio.com/token-device/-KJlTaOQPwP-ssImryV1
-	var pathSplit = path.split(usuarioDevicesURI + "/")
+	var pathSplit = path.split(usuariosInstagramURI + "/")
 	var idAutoGenerado = pathSplit[1];
 
 	var respuesta = generarRespuestaUsuario(db, idAutoGenerado);
@@ -125,14 +128,14 @@ app.post('/' + usuarioDevicesURI, function(request, response) {
 	response.send(JSON.stringify(respuesta));
 });
 
-function generarRespuestaUsuario(db, idAutoGenerado) {
+function generarRespuestaUsuario(db, idAuto) {
 	var respuesta = {};
 	var usuario = "";
 	var ref = db.ref("usuario_instagram");
 	ref.on("child_added", function(snapshot, prevChildKey) {
 		usuario = snapshot.val();
 		respuesta = {
-			id: idAutoGenerado,
+			id: idAuto,
 			id_dispositivo: usuario.id_dispositivo,
 			id_usuario_instagram: usuario.id_usuario_instagram
 		};
