@@ -215,7 +215,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 				console.log("nombreUsuario: " + nombreUsuario);
 				
 				var msg="Hola "+registro.nombre_usuario_instagram+". Tienes un like en una foto tuya";
-				enviaNotificacion(registro.id_dispositivo,msg, idUsrInst, nombreUsuario, urlFotoUsr);
+				enviarNotificacion(registro.id_dispositivo,msg, idUsrInst, nombreUsuario, urlFotoUsr);
 				
 				contarEnvios++;
 				return true; //en cuanto encuentra uno, sale del bucle del forEach
