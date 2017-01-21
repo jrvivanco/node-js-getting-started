@@ -119,7 +119,7 @@ app.post('/' + usuariosInstagramURI, function(request, response) {
 		nombre_usuario_instagram: nombre_usr
 	});	
 
-	var path = usuarios.toString(); //https://mascotita-aa119.firebaseio.com/token-device/-KJlTaOQPwP-ssImryV1
+	var path = usuariosInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
 	var pathSplit = path.split(usuariosInstagramURI + "/")
 	var idAutoGenerado = pathSplit[1];
 
