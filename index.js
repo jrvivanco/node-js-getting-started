@@ -109,14 +109,14 @@ var usuariosInstagramURI = "registrar-usuario";
 app.post('/' + usuariosInstagramURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
-	var nombre_usuario = request.body.nombre_usuario_instagram;
+	var id_nombre = request.body.nombre_usuario_instagram;
 	
 	var db = firebase.database();
 	var usuariosInstagram = db.ref(usuariosInstagramURI).push();
 	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
 		id_usuario_instagram: id_usuario_instagram,
-		nombre_usuario_instagram: nombre_usuario_instagram
+		id_nombre: nombre_usuario_instagram
 	});	
 
 	var path = usuarios.toString(); //https://mascotita-aa119.firebaseio.com/token-device/-KJlTaOQPwP-ssImryV1
