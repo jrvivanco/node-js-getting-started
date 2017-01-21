@@ -68,8 +68,8 @@ function generarRespuestaAToken(db, idAutoGenerado) {
 //https://calm-headland-74792.herokuapp.com/registrar-usuario/
 //id
 //id_usuario_instagram
-app.get("/registrar-usuario/:id/:id_usuario_instagram", function(request, response){
-	var id 		= request.params.id;
+app.get("/registrar-usuario/:id_dispositivo/:id_usuario_instagram", function(request, response){
+	var id_dispositivo 		= request.params.id_dispositivo;
 	var id_usuario_instagram 	= request.params.id_usuario_instagram;
 
 	var db = firebase.database();
