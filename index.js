@@ -180,16 +180,78 @@ function generarRespuestaLikes(db, idAuto) {
 	return respuesta;
 }
 
-function enviarNotificaion(tokenDestinatario, mensaje) {
+var notificaUsrURI="notifica-usuario";
+app.post("/"+notificaUsrURI, function(request, response){	
+
+	var miToken		=request.body.id_token; 
+	var idUsrInst 	=request.body.id_usr_inst;
+	var urlFotoUsr  =request.body.url_foto_usuario;
+
+	var respuesta = {};
+	var registro = "";
+	var nombreUsuario ="";
+
+	var db = firebase.database();
+	var ref = db.ref(usuariosInstagramURI); //busco entre los usuarios registrados
+	var contarEnvios=0;
+        contarEnvios++;
+
+	ref.once("value", function(snapshot){
+	//ref.orderByChild("id_usuario_instagram").equalTo(idUsrInst).on("value", function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+	  		
+	  		//console.log("key: " + childSnapshot.getKey());
+	  		registro=childSnapshot.val();
+
+			if (registro.id_dispositivo!==miToken && registro.id_usuario_instagram==idUsrInst){
+				//es el usuario de la foto y no es el dispositivo desde el que hago el lanzamiento
+				//tengo que enviarle una notificación
+
+				nombreUsuario=registro.nombre_usuario_instagram;
+				
+				console.log("Notificación #"+contarEnvios++);//+" a "+registro.id_dispositivo+" para el usuario "+registro.id_usuario_instagram);
+				//console.log("id_usuario_instagram: " + registro.id_usuario_instagram);
+				//console.log("id_dispositivo: " + registro.id_dispositivo);
+				console.log("nombreUsuario: " + nombreUsuario);
+				
+				var msg="Hola "+registro.nombre_usuario_instagram+". Tienes un like en una foto tuya";
+				enviaNotificacion(registro.id_dispositivo,msg, idUsrInst, nombreUsuario, urlFotoUsr);
+				
+				contarEnvios++;
+				return true; //en cuanto encuentra uno, sale del bucle del forEach
+			}
+
+		});
+		
+	}, function (errorObject) {
+		  console.log("La lectura de datos falló: " + errorObject.code);
+		  respuesta={
+		  	id_usuario_instagram: "juravica2016" //para que abra el propio timeline
+		  	//,nombre_usuario_instagram: "Puppies" 
+		  };
+	});
+	respuesta ={
+					id_usuario_instagram: idUsrInst //registro.id_usuario_instagram,
+					//,nombre_usuario_instagram: nombreUsuario // registro.nombre_usuario_instagram
+				};
+	response.setHeader("Content-Type", "application/json");
+	response.send(JSON.stringify(respuesta));
+})
+
+function enviarNotificaion(tokenDestinatario, mensaje, idUsuario, nomUsuario, urlFoto) {
 	var serverKey = 'AIzaSyDeUlEKqDwdz4pbRy87cJA8F3VK3pv4ImI';
 	var fcm = new FCM(serverKey);
 
 	var message = {
 	    to: tokenDestinatario, // required
 	    collapse_key: '', 
-	    data: {},
+	    data: {
+			idUsu: idUsuario,
+	    	nomUsu: nomUsuario,
+	    	urlUsu: urlFoto
+		},
 	    notification: {
-	        title: 'Notificacion desde Servidor',
+	        title: 'Mascotita 7.0',
 	        body: mensaje,
 	        icon: "notificacion",
 	        sound: "default",
