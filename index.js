@@ -238,7 +238,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 	response.send(JSON.stringify(respuesta));
 })
 
-function enviarNotificaion(tokenDestinatario, mensaje, idUsuario, nomUsuario, urlFoto) {
+function enviarNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, urlFoto) {
 	var serverKey = 'AIzaSyDeUlEKqDwdz4pbRy87cJA8F3VK3pv4ImI';
 	var fcm = new FCM(serverKey);
 
