@@ -103,7 +103,7 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 
 //POST
 //https://calm-headland-74792.herokuapp.com/usuario_instagram
-//token
+//id_dispositivo
 //id_usuario_instagram
 var usuariosInstagramURI = "registrar-usuario";
 app.post('/' + usuariosInstagramURI, function(request, response) {
@@ -114,7 +114,7 @@ app.post('/' + usuariosInstagramURI, function(request, response) {
 	var usuariosInstagram = db.ref(usuariosInstagramURI).push();
 	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
-		id_usuario_instagram: id_usuario_instagram,
+		id_usuario_instagram: id_usuario_instagram
 	});	
 
 	var path = usuariosInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
@@ -141,8 +141,47 @@ function generarRespuestaUsuario(db, idAuto) {
 	return respuesta;
 }
 
+var likesInstagramURI = "like-generado";
+app.post('/' + likesInstagramURI, function(request, response) {
+	var id_disp = request.body.id_dispositivo;
+	var id_user = request.body.id_usuario_instagram;
+	var id_foto = request.body.id_foto_instagram;	
+
+	var db = firebase.database();
+	var likesInstagram = db.ref(usuariosInstagramURI).push();
+	likesInstagram.set({
+		id_dispositivo: id_disp,
+		id_usuario_instagram: id_user,
+		id_foto_instagram: id_foto
+	});	
+
+	var path = likesInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
+	var pathSplit = path.split(likesInstagramURI + "/")
+	var idAutoGenerado = pathSplit[1];
+
+	var respuesta = generarRespuestaLikes(db, idAutoGenerado);
+	response.setHeader("Content-Type", "application/json");
+	response.send(JSON.stringify(respuesta));
+});
+
+function generarRespuestaLikes(db, idAuto) {
+	var respuesta = {};
+	var usuario = "";
+	var ref = db.ref("registrar-usuario");
+	ref.on("child_added", function(snapshot, prevChildKey) {
+		usuario = snapshot.val();
+		respuesta = {
+			id: idAuto,
+			id_dispositivo: usuario.id_dispositivo,
+			id_usuario_instagram: usuario.id_usuario_instagram,
+			id_foto_instagram: usuario.id_foto_instagram
+		};
+	});
+	return respuesta;
+}
+
 function enviarNotificaion(tokenDestinatario, mensaje) {
-	var serverKey = 'TU_APYKEY';
+	var serverKey = 'AIzaSyDeUlEKqDwdz4pbRy87cJA8F3VK3pv4ImI';
 	var fcm = new FCM(serverKey);
 
 	var message = {
