@@ -109,14 +109,12 @@ var usuariosInstagramURI = "registrar-usuario";
 app.post('/' + usuariosInstagramURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
-	var nombre_usr = request.body.nombre_usuario_instagram;
 	
 	var db = firebase.database();
 	var usuariosInstagram = db.ref(usuariosInstagramURI).push();
 	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
 		id_usuario_instagram: id_usuario_instagram,
-		nombre_usuario_instagram: nombre_usr
 	});	
 
 	var path = usuariosInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
@@ -131,7 +129,7 @@ app.post('/' + usuariosInstagramURI, function(request, response) {
 function generarRespuestaUsuario(db, idAuto) {
 	var respuesta = {};
 	var usuario = "";
-	var ref = db.ref("usuariosInstagramURI");
+	var ref = db.ref("registrar-usuario");
 	ref.on("child_added", function(snapshot, prevChildKey) {
 		usuario = snapshot.val();
 		respuesta = {
