@@ -106,7 +106,7 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 //token
 //id_usuario_instagram
 var usuarioDevicesURI = "usuario_instagram";
-app.post('/' + usuarioDevicesURIDevicesURI, function(request, response) {
+app.post('/' + usuarioDevicesURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
 	var db = firebase.database();
