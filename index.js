@@ -105,7 +105,7 @@ app.get("/toque-animal/:id/:animal", function(request, response){
 //https://calm-headland-74792.herokuapp.com/usuario_instagram
 //token
 //id_usuario_instagram
-var usuariosInstagramURI = "usuario_instagram";
+var usuariosInstagramURI = "registrar-usuario";
 app.post('/' + usuariosInstagramURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
@@ -131,7 +131,7 @@ app.post('/' + usuariosInstagramURI, function(request, response) {
 function generarRespuestaUsuario(db, idAuto) {
 	var respuesta = {};
 	var usuario = "";
-	var ref = db.ref("usuario_instagram");
+	var ref = db.ref("usuariosInstagramURI");
 	ref.on("child_added", function(snapshot, prevChildKey) {
 		usuario = snapshot.val();
 		respuesta = {
@@ -142,42 +142,6 @@ function generarRespuestaUsuario(db, idAuto) {
 	});
 	return respuesta;
 }
-
-//GET
-//https://calm-headland-74792.herokuapp.com/registrar-usuario/
-//id
-//id_usuario_instagram
-app.get("/registrar-usuario/:id_dispositivo/:id_usuario_instagram", function(request, response){
-	var id_dispositivo 		= request.params.id_dispositivo;
-	var id_usuario_instagram 	= request.params.id_usuario_instagram;
-
-	var db = firebase.database();
-	var ref = db.ref("usuario_instagram/" + id);
-	var usuario = "";
-	var respuesta = {};
-	
-	ref.on("value", function(snapshot) {
-		console.log(snapshot.val());
-		usuario = snapshot.val();
-		var mensaje = id_usuario_instagram + " te dio un toque";
-		enviarNotificaion(usuario.token, mensaje);
-		respuesta = {
-			id: id,
-			id_dispositivo: usuario.id_dispositivo,
-			id_usuario_instagram: usuario.id_usuario_instagram
-		};
-		response.send(JSON.stringify(respuesta));
-	}, function (errorObject) {
-		console.log("The read failed: " + errorObject.code);
-		respuesta = {
-			id: "",
-			id_dispositivo: "",
-			id_usuario_instagram: ""
-		};
-		response.send(JSON.stringify(respuesta));
-
-	});
-});
 
 function enviarNotificaion(tokenDestinatario, mensaje) {
 	var serverKey = 'TU_APYKEY';
