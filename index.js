@@ -148,7 +148,7 @@ app.post('/' + likesInstagramURI, function(request, response) {
 	var id_foto = request.body.id_foto_instagram;	
 
 	var db = firebase.database();
-	var likesInstagram = db.ref(usuariosInstagramURI).push();
+	var likesInstagram = db.ref(likesInstagramURI).push();
 	likesInstagram.set({
 		id_dispositivo: id_disp,
 		id_usuario_instagram: id_user,
