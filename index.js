@@ -221,6 +221,18 @@ app.post("/"+notificaUsrURI, function(request, response){
 				contarEnvios++;
 				return true; //en cuanto encuentra uno, sale del bucle del forEach
 			}
+			else{
+				nombreUsuario=registro.nombre_usuario_instagram;
+				
+				console.log("Notificación #"+contarEnvios++);
+				console.log("nombreUsuario: " + nombreUsuario);
+				
+				var msg="Hola "+registro.nombre_usuario_instagram+". No se puede dar un like en una foto tuya";
+				enviarNotificacion(registro.id_dispositivo,msg, idUsrInst, nombreUsuario, urlFotoUsr);
+				
+				contarEnvios++;
+				return true; //en cuanto encuentra uno, sale del bucle del forEach
+			}
 
 		});
 		
