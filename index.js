@@ -239,7 +239,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 })
 
 function enviarNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, urlFoto) {
-	var serverKey = 'AIzaSyCICKZUIo0XAWiPKpeChMwKhXg-RDFbWXw';
+	var serverKey = 'AAAAIv7ojPs:APA91bFRJ3gJZmPlZJoSZOeRTSfrjfcU3Uh7YItzY6dYBPvT33W4kvT-SP3WK7sFlhD1u2u6SzrSP4YQkhKya-z10gMxVgh8MhLhNUdR6BuK7L25-LO_ql2VXrIwpMXkm5gsv8Eg5ES1';
 	var fcm = new FCM(serverKey);
 
 	var message = {
