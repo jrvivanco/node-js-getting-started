@@ -183,9 +183,9 @@ function generarRespuestaLikes(db, idAuto) {
 var notificaUsrURI="notifica-usuario";
 app.post("/"+notificaUsrURI, function(request, response){	
 
-	var miToken		=request.body.id_token; 
-	var idUsrInst 	=request.body.id_usr_inst;
-	var urlFotoUsr  =request.body.url_foto_usuario;
+	var miToken		= request.body.id_token; 
+	var idUsrInst 	= request.body.id_usr_inst;
+	var urlFotoUsr  = request.body.url_foto_usuario;
 
 	var respuesta = {};
 	var registro = "";
@@ -200,7 +200,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 	//ref.orderByChild("id_usuario_instagram").equalTo(idUsrInst).on("value", function(snapshot) {
 		snapshot.forEach(function(childSnapshot){
 	  		
-	  		//console.log("key: " + childSnapshot.getKey());
+	  		console.log("key: " + childSnapshot.getKey());
 	  		registro=childSnapshot.val();
 
 			if (registro.id_dispositivo!==miToken && registro.id_usuario_instagram==idUsrInst){
