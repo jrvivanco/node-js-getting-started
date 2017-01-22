@@ -258,6 +258,7 @@ function enviarNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, u
 	};
 
 	fcm.send(message, function(err, response){
+		console.log("err: " + err);
 	    if (err) {
 	        console.log("Something has gone wrong!");
 	    } else {
