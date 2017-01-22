@@ -116,7 +116,7 @@ app.post('/' + usuariosInstagramURI, function(request, response) {
 	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
 		id_usuario_instagram: id_usuario_instagram,
-		nombre_usuario_instagram = user_instagram;
+		nombre_usuario_instagram: user_instagram;
 	});	
 
 	var path = usuariosInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
