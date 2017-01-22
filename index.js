@@ -109,12 +109,14 @@ var usuariosInstagramURI = "registrar-usuario";
 app.post('/' + usuariosInstagramURI, function(request, response) {
 	var id_dispositivo 	= request.body.id_dispositivo;
 	var id_usuario_instagram 	= request.body.id_usuario_instagram;
+	var user_instagram = request.body.nombre_usuario_instagram;
 	
 	var db = firebase.database();
 	var usuariosInstagram = db.ref(usuariosInstagramURI).push();
 	usuariosInstagram.set({
 		id_dispositivo: id_dispositivo,
-		id_usuario_instagram: id_usuario_instagram
+		id_usuario_instagram: id_usuario_instagram,
+		nombre_usuario_instagram = user_instagram;
 	});	
 
 	var path = usuariosInstagram.toString(); //https://mascotita-aa119.firebaseio.com/registrar-usuario/-KJlTaOQPwP-ssImryV1
@@ -135,7 +137,8 @@ function generarRespuestaUsuario(db, idAuto) {
 		respuesta = {
 			id: idAuto,
 			id_dispositivo: usuario.id_dispositivo,
-			id_usuario_instagram: usuario.id_usuario_instagram
+			id_usuario_instagram: usuario.id_usuario_instagram,
+			nombre_usuario_instagram: usuario.nombre_usuario_instagram
 		};
 	});
 	return respuesta;
@@ -207,7 +210,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 				//es el usuario de la foto y no es el dispositivo desde el que hago el lanzamiento
 				//tengo que enviarle una notificación
 
-				nombreUsuario=registro.id_usuario_instagram;
+				nombreUsuario=registro.nombre_usuario_instagram;
 				
 				console.log("Notificación #"+contarEnvios++);
 				console.log("nombreUsuario: " + nombreUsuario);
@@ -224,7 +227,7 @@ app.post("/"+notificaUsrURI, function(request, response){
 	}, function (errorObject) {
 		  console.log("La lectura de datos falló: " + errorObject.code);
 		  respuesta={
-		  	id_usuario_instagram: "juravica2016" //para que abra el propio timeline
+		  	id_usuario_instagram: "4393478762" //para que abra el propio timeline
 		  	//,nombre_usuario_instagram: "Puppies" 
 		  };
 	});
