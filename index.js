@@ -202,16 +202,14 @@ app.post("/"+notificaUsrURI, function(request, response){
 	  		
 	  		console.log("key: " + childSnapshot.getKey());
 	  		registro=childSnapshot.val();
-			console.log("registro: " + childSnapshot.val());
+			
 			if (registro.id_dispositivo!==miToken && registro.id_usuario_instagram==idUsrInst){
 				//es el usuario de la foto y no es el dispositivo desde el que hago el lanzamiento
 				//tengo que enviarle una notificación
 
-				nombreUsuario=registro.nombre_usuario_instagram;
+				nombreUsuario=registro.id_usuario_instagram;
 				
-				console.log("Notificación #"+contarEnvios++);//+" a "+registro.id_dispositivo+" para el usuario "+registro.id_usuario_instagram);
-				//console.log("id_usuario_instagram: " + registro.id_usuario_instagram);
-				//console.log("id_dispositivo: " + registro.id_dispositivo);
+				console.log("Notificación #"+contarEnvios++);
 				console.log("nombreUsuario: " + nombreUsuario);
 				
 				var msg="Hola "+registro.nombre_usuario_instagram+". Tienes un like en una foto tuya";
