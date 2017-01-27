@@ -183,7 +183,8 @@ function generarRespuestaLikes(db, idAuto) {
 	return respuesta;
 }
 
-var notificaUsrURI="notifica-usuario";
+//Version 7.0
+/*var notificaUsrURI="notifica-usuario";
 app.post("/"+notificaUsrURI, function(request, response){	
 
 	var miToken		= request.body.id_token; 
@@ -274,6 +275,115 @@ function enviarNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, u
 
 	fcm.send(message, function(err, response){
 		console.log("err: " + err);
+	    if (err) {
+	        console.log("Something has gone wrong!");
+	    } else {
+	        console.log("Successfully sent with response: ", response);
+	    }
+	});
+}
+*/
+
+var notificaUsrURI="notifica-usuario";
+//Version 7.5
+app.post("/"+notificaUsrURI, function(request, response){	
+
+	var miToken		=request.body.id_token; 
+	var idUsrInst 	=request.body.id_usr_inst;
+	var urlFotoUsr  =request.body.url_foto_usuario;
+	//Se añade quién hace el click
+	var fromNomUsr  =request.body.from_nom_usr;
+	var fromIdUsr  	=request.body.from_id_usr;
+	var fromUrlUsr  =request.body.from_url_usr; 
+
+	var respuesta = {};
+	var registro = "";
+	var nombreUsuario ="";
+
+	var db = firebase.database();
+	var ref = db.ref(usuariosInstagramURI); //busco entre los usuarios registrados
+	var contarEnvios=0;
+		contarEnvios++;
+
+	ref.once("value", function(snapshot){
+	//ref.orderByChild("id_usuario_instagram").equalTo(idUsrInst).on("value", function(snapshot) {
+		snapshot.forEach(function(childSnapshot){
+	  		
+	  		console.log("key: " + childSnapshot.getKey());
+	  		registro=childSnapshot.val();
+
+			if (registro.id_dispositivo!==miToken && registro.id_usuario_instagram==idUsrInst){
+				//es el usuario de la foto y no es el dispositivo desde el que hago el lanzamiento
+				//tengo que enviarle una notificación
+
+				nombreUsuario=registro.nombre_usuario_instagram;
+				
+				console.log("Notificación #"+contarEnvios++);
+				console.log("nombreUsuario: " + nombreUsuario);
+				
+				var msg="Hola "+registro.nombre_usuario_instagram+". Tienes un like en una foto tuya";
+				enviaNotificacion(registro.id_dispositivo, msg, idUsrInst, nombreUsuario, urlFotoUsr, fromNomUsr, fromIdUsr, fromUrlUsr);
+				
+				contarEnvios++;
+				return true; //en cuanto encuentra uno, sale del bucle del forEach
+			}
+			else{
+				nombreUsuario=registro.nombre_usuario_instagram;
+				
+				console.log("Notificación #"+contarEnvios++);
+				console.log("nombreUsuario: " + nombreUsuario);
+				
+				var msg="Hola "+registro.nombre_usuario_instagram+". No se puede dar un like en una foto tuya";
+				enviaNotificacion(registro.id_dispositivo, msg, idUsrInst, nombreUsuario, urlFotoUsr, fromNomUsr, fromIdUsr, fromUrlUsr);
+				
+				contarEnvios++;
+				return true; //en cuanto encuentra uno, sale del bucle del forEach
+			}
+
+
+		});
+		
+	}, function (errorObject) {
+		  console.log("La lectura de datos falló: " + errorObject.code);
+		  respuesta={
+		  	id_usuario_instagram: "4393478762" //para que abra el propio timeline
+		  	//,nombre_usuario_instagram: "juravica2016" 
+		  };
+	});
+	respuesta ={
+					id_usuario_instagram: idUsrInst //registro.id_usuario_instagram,
+					//,nombre_usuario_instagram: nombreUsuario // registro.nombre_usuario_instagram
+				};
+	response.setHeader("Content-Type", "application/json");
+	response.send(JSON.stringify(respuesta));
+})
+
+
+
+function enviaNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, urlFoto, frNomUsr, frIdUsr, frUrlUsr){
+	var serverKey = 'AAAAIv7ojPs:APA91bFRJ3gJZmPlZJoSZOeRTSfrjfcU3Uh7YItzY6dYBPvT33W4kvT-SP3WK7sFlhD1u2u6SzrSP4YQkhKya-z10gMxVgh8MhLhNUdR6BuK7L25-LO_ql2VXrIwpMXkm5gsv8Eg5ES1';
+	var fcm = new FCM(serverKey);
+	var message = {
+	    to: tokenDestinatario, // required
+	    collapse_key: '', //'your_collapse_key', 
+	    data: { 
+	    	idUsu: idUsuario,
+	    	nomUsu: nomUsuario,
+	    	urlUsu: urlFoto,
+	    	fromNomUsr: frNomUsr,
+	    	fromIdUsr: frIdUsr,
+	    	fromUrlUsr: frUrlUsr
+	    },
+	    notification: {
+	        title: 'Mascotita 7.5',
+	        body: mensaje,
+	        icon: "notificacion",
+	        sound: "default",
+	        color: "#00BCD4"
+	    }
+	};
+
+	fcm.send(message, function(err, response){
 	    if (err) {
 	        console.log("Something has gone wrong!");
 	    } else {
