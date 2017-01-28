@@ -375,7 +375,7 @@ function enviaNotificacion(tokenDestinatario, mensaje, idUsuario, nomUsuario, ur
 	    	fromUrlUsr: frUrlUsr
 	    },
 	    notification: {
-	        title: 'Mascotita 7.5',
+	        title: 'Mascotita 8',
 	        body: mensaje,
 	        icon: "notificacion",
 	        sound: "default",
